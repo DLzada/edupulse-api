@@ -5,6 +5,7 @@ import com.daniel.edupulse_api.dto.SchoolDTO;
 import com.daniel.edupulse_api.service.SchoolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,5 +32,11 @@ public class SchoolController {
     @ResponseStatus(HttpStatus.CREATED)
     public SchoolDTO create(@RequestBody SchoolDTO dto){
         return service.save(dto);
+    }
+
+    @DeleteMapping("/{inepCode}")
+    public ResponseEntity<Void> delete(@PathVariable String inepCode){
+        service.delete(inepCode);
+        return ResponseEntity.noContent().build();
     }
 }
