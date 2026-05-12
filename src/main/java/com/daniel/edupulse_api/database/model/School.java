@@ -26,7 +26,7 @@ public class School {
 
     private String city;
 
-    private String state;
+    private String state = "PB";
 
     // Campo para o pontuaçao
     private boolean hasInternet;
