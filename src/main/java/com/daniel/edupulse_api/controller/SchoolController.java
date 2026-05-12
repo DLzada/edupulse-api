@@ -1,6 +1,7 @@
 package com.daniel.edupulse_api.controller;
 
 import com.daniel.edupulse_api.domain.model.SchoolLevel;
+import com.daniel.edupulse_api.dto.CityStatsDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import com.daniel.edupulse_api.service.SchoolService;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,11 @@ public class SchoolController {
     public ResponseEntity<Void> delete(@PathVariable String inepCode){
         service.delete(inepCode);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/stats/{city}")
+    @ResponseStatus(HttpStatus.OK)
+    public CityStatsDTO getStatsCity(@PathVariable String city){
+        return service.getCityStats(city);
     }
 }
