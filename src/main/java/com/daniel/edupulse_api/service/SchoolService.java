@@ -68,6 +68,7 @@ public class SchoolService {
         );
     }
 
+    @Transactional
     public SchoolDTO save(SchoolDTO dto){
         School school = School.builder()
                 .inepCode(dto.inepCode())
