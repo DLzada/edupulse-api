@@ -15,8 +15,30 @@ public class SchoolService {
 
     public List<SchoolDTO> findAll(){
         return schoolRepository.findAll().stream()
-                .map(s -> new SchoolDTO(s.getInepCode(), s.getName(), s.getCity(), s.getState(), s.isHasInternet(), s.getStudentCount()))
+                .map(this::mapToDTO)
                 .toList();
+    }
+
+    private SchoolDTO mapToDTO(School school) {
+        double score = 0.0;
+
+        if(school.isHasInternet()) score += 30.0;
+        if (school.isHasLibrary()) score += 30.0;
+        if (school.isHasComputerLab()) score += 20.0;
+        if (school.isHasSportsCourt()) score += 20.0;
+
+        return new SchoolDTO(
+                school.getInepCode(),
+                school.getName(),
+                school.getCity(),
+                school.getState(),
+                school.getStudentCount(),
+                school.isHasInternet(),
+                school.isHasLibrary(),
+                school.isHasComputerLab(),
+                school.isHasSportsCourt(),
+                score
+        );
     }
 
     public SchoolDTO save(SchoolDTO dto){
@@ -25,19 +47,15 @@ public class SchoolService {
                 .name(dto.name())
                 .city(dto.city())
                 .state(dto.state())
-                .hasInternet(dto.hasInternet())
                 .studentCount(dto.studentCount())
+                .hasInternet(dto.hasInternet())
+                .hasLibrary(dto.hasLibrary())
+                .hasComputerLab(dto.hasComputerLab())
+                .hasSportsCourt(dto.hasSportsCourt())
                 .build();
 
         School savedSchool = schoolRepository.save(school);
 
-        return new SchoolDTO(
-                savedSchool.getInepCode(),
-                savedSchool.getName(),
-                savedSchool.getCity(),
-                savedSchool.getState(),
-                savedSchool.isHasInternet(),
-                savedSchool.getStudentCount()
-        );
+        return mapToDTO(savedSchool);
     }
 }

@@ -5,6 +5,10 @@ public record SchoolDTO(
         String name,
         String city,
         String state,
+        Integer studentCount,
         boolean hasInternet,
-        Integer studentCount
+        boolean hasLibrary,
+        boolean hasComputerLab,
+        boolean hasSportsCourt,
+        Double infrastructureScore
 ) {}
