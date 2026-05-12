@@ -1,5 +1,6 @@
 package com.daniel.edupulse_api.controller;
 
+import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import com.daniel.edupulse_api.service.SchoolService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,8 @@ public class SchoolController {
 
     @GetMapping("/ranking/{city}")
     @ResponseStatus(HttpStatus.OK)
-    public List<SchoolDTO> getRanking(@PathVariable String city){
-        return service.getRankingByCity(city);
+    public List<SchoolDTO> getRanking(@PathVariable String city, @RequestParam(required = false) SchoolLevel level){
+        return service.getRankingByCity(city, level);
     }
 
     @PostMapping
