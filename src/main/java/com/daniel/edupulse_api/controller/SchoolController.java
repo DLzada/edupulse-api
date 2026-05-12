@@ -46,4 +46,10 @@ public class SchoolController {
     public CityStatsDTO getStatsCity(@PathVariable String city){
         return service.getCityStats(city);
     }
+
+    @GetMapping("/critical/{city}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SchoolDTO> getCriticalSchools(@PathVariable String city){
+        return service.getCriticalSchools(city);
+    }
 }
