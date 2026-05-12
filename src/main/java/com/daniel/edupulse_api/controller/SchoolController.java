@@ -20,6 +20,12 @@ public class SchoolController {
         return service.findAll();
     }
 
+    @GetMapping("/ranking/{city}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SchoolDTO> getRanking(@PathVariable String city){
+        return service.getRankingByCity(city);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SchoolDTO create(@RequestBody SchoolDTO dto){
