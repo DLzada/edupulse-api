@@ -6,6 +6,7 @@ import com.daniel.edupulse_api.dto.SchoolDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -59,5 +60,12 @@ public class SchoolService {
         School savedSchool = schoolRepository.save(school);
 
         return mapToDTO(savedSchool);
+    }
+
+    public List<SchoolDTO> getRankingByCity(String city){
+        return schoolRepository.findByCityIgnoreCase(city).stream()
+                .map(this::mapToDTO)
+                .sorted(Comparator.comparing(SchoolDTO::infrastructureScore).reversed())
+                .toList();
     }
 }
