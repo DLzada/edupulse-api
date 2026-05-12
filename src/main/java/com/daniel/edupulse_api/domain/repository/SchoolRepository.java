@@ -11,4 +11,6 @@ public interface SchoolRepository extends JpaRepository<School, UUID> {
     List<School> findByCityIgnoreCase(String city);
 
     List<School> findByCityIgnoreCaseAndLevel(String city, SchoolLevel level);
+
+    void deleteByInepCode(String inepCode);
 }
