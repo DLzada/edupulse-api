@@ -29,6 +29,9 @@ public record SchoolDTO(
         boolean hasScienceLab,
         boolean hasAccessibility,
         boolean hasStudentWifi,
+
+        String technicalNotes,
+
         Double infrastructureScore,
         String infrastructureStatus
 ) {}
