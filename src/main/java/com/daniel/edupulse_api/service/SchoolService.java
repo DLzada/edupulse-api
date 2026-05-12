@@ -22,12 +22,28 @@ public class SchoolService {
     }
 
     private SchoolDTO mapToDTO(School school) {
-        double score = 0.0;
+        double connectivityScore = 0;
+        double pedagogicScore = 0;
+        double wellnessScore = 0;
 
-        if(school.isHasInternet()) score += 30.0;
-        if (school.isHasLibrary()) score += 30.0;
-        if (school.isHasComputerLab()) score += 20.0;
-        if (school.isHasSportsCourt()) score += 20.0;
+        // 1. Conectividade(max 30)
+        if(school.isHasInternet()) connectivityScore += 10;
+        if (school.isHasStudentWifi()) connectivityScore += 20;
+
+        //2. estrutura pedagogica(max 40)
+        if(school.isHasLibrary()) pedagogicScore += 15;
+        if(school.isHasComputerLab()) pedagogicScore += 15;
+        if(school.isHasScienceLab()) pedagogicScore += 10;
+
+        //3. bem-estar (max 30)
+        if(school.isHasAccessibility()) wellnessScore += 15;
+        if(school.isHasSportsCourt()) wellnessScore += 15;
+
+        double finalScore = connectivityScore + pedagogicScore + wellnessScore;
+
+        String status = "Crítica";
+        if(finalScore > 70) status = "Referência";
+        else if(finalScore > 40) status = "Básica";
 
         return new SchoolDTO(
                 school.getInepCode(),
@@ -40,7 +56,11 @@ public class SchoolService {
                 school.isHasLibrary(),
                 school.isHasComputerLab(),
                 school.isHasSportsCourt(),
-                score
+                school.isHasScienceLab(),
+                school.isHasAccessibility(),
+                school.isHasStudentWifi(),
+                finalScore,
+                status
         );
     }
 
@@ -56,6 +76,9 @@ public class SchoolService {
                 .hasLibrary(dto.hasLibrary())
                 .hasComputerLab(dto.hasComputerLab())
                 .hasSportsCourt(dto.hasSportsCourt())
+                .hasScienceLab(dto.hasScienceLab())
+                .hasAccessibility(dto.hasAccessibility())
+                .hasStudentWifi(dto.hasStudentWifi())
                 .build();
 
         School savedSchool = schoolRepository.save(school);
