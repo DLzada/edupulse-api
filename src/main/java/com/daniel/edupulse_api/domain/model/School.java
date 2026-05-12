@@ -35,4 +35,7 @@ public class School {
     private boolean hasSportsCourt;
 
     private Integer studentCount;
+
+    @Enumerated(EnumType.STRING)
+    private SchoolLevel level;
 }
