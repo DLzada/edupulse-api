@@ -1,4 +1,4 @@
-package com.daniel.edupulse_api.database.model;
+package com.daniel.edupulse_api.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;

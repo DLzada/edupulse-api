@@ -1,7 +1,7 @@
 package com.daniel.edupulse_api.service;
 
-import com.daniel.edupulse_api.database.model.School;
-import com.daniel.edupulse_api.database.repository.SchoolRepository;
+import com.daniel.edupulse_api.domain.model.School;
+import com.daniel.edupulse_api.domain.repository.SchoolRepository;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

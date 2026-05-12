@@ -1,6 +1,6 @@
-package com.daniel.edupulse_api.database.repository;
+package com.daniel.edupulse_api.domain.repository;
 
-import com.daniel.edupulse_api.database.model.School;
+import com.daniel.edupulse_api.domain.model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
