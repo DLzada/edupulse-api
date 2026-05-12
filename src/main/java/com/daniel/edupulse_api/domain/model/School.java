@@ -33,6 +33,9 @@ public class School {
     private boolean hasLibrary;
     private boolean hasComputerLab;
     private boolean hasSportsCourt;
+    private boolean hasScienceLab;
+    private boolean hasAccessibility;
+    private boolean hasStudentWifi;
 
     private Integer studentCount;
 
