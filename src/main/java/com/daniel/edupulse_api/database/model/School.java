@@ -22,7 +22,7 @@ public class School {
     private String inepCode;
 
     @Column(nullable = false)
-    private String nome;
+    private String name;
 
     private String city;
 
