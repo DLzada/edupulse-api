@@ -62,6 +62,7 @@ public class SchoolService {
                 school.isHasScienceLab(),
                 school.isHasAccessibility(),
                 school.isHasStudentWifi(),
+                school.getTechnicalNotes(),
                 finalScore,
                 status
         );
@@ -82,6 +83,7 @@ public class SchoolService {
                 .hasScienceLab(dto.hasScienceLab())
                 .hasAccessibility(dto.hasAccessibility())
                 .hasStudentWifi(dto.hasStudentWifi())
+                .technicalNotes(dto.technicalNotes())
                 .build();
 
         School savedSchool = schoolRepository.save(school);
