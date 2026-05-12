@@ -1,6 +1,7 @@
 package com.daniel.edupulse_api.service;
 
 import com.daniel.edupulse_api.domain.model.School;
+import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.domain.repository.SchoolRepository;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import lombok.RequiredArgsConstructor;
@@ -62,8 +63,15 @@ public class SchoolService {
         return mapToDTO(savedSchool);
     }
 
-    public List<SchoolDTO> getRankingByCity(String city){
-        return schoolRepository.findByCityIgnoreCase(city).stream()
+    public List<SchoolDTO> getRankingByCity(String city, SchoolLevel level){
+        List<School> schools;
+
+        if(level != null){
+            schools = schoolRepository.findByCityIgnoreCaseAndLevel(city, level);
+        } else {
+            schools = schoolRepository.findByCityIgnoreCase(city);
+        }
+        return schools.stream()
                 .map(this::mapToDTO)
                 .sorted(Comparator.comparing(SchoolDTO::infrastructureScore).reversed())
                 .toList();
