@@ -33,6 +33,7 @@ public class SchoolService {
                 school.getCity(),
                 school.getState(),
                 school.getStudentCount(),
+                school.getLevel(),
                 school.isHasInternet(),
                 school.isHasLibrary(),
                 school.isHasComputerLab(),
@@ -48,6 +49,7 @@ public class SchoolService {
                 .city(dto.city())
                 .state(dto.state())
                 .studentCount(dto.studentCount())
+                .level(dto.level())
                 .hasInternet(dto.hasInternet())
                 .hasLibrary(dto.hasLibrary())
                 .hasComputerLab(dto.hasComputerLab())
