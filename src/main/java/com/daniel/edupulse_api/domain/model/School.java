@@ -37,6 +37,9 @@ public class School {
     private boolean hasAccessibility;
     private boolean hasStudentWifi;
 
+    @Column(columnDefinition = "TEXT")
+    private String technicalNotes;
+
     private Integer studentCount;
 
     @Enumerated(EnumType.STRING)
