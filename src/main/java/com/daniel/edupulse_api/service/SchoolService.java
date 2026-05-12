@@ -4,6 +4,7 @@ import com.daniel.edupulse_api.domain.model.School;
 import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.domain.repository.SchoolRepository;
 import com.daniel.edupulse_api.dto.SchoolDTO;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -98,5 +99,10 @@ public class SchoolService {
                 .map(this::mapToDTO)
                 .sorted(Comparator.comparing(SchoolDTO::infrastructureScore).reversed())
                 .toList();
+    }
+
+    @Transactional
+    public void delete(String inepCode){
+        schoolRepository.deleteByInepCode(inepCode);
     }
 }
