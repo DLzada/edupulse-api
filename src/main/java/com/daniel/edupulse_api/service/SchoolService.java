@@ -136,7 +136,15 @@ public class SchoolService {
                 wifiSchools,
                 wifiPercentage
         );
+    }
 
+    public List<SchoolDTO> getCriticalSchools(String city){
+        List<School> schools = schoolRepository.findByCityIgnoreCase(city);
 
+        return schools.stream()
+                .map(this::mapToDTO)
+                .filter(dto -> dto.infrastructureScore() < 50.0)
+                .sorted(Comparator.comparing(SchoolDTO::infrastructureScore))
+                .toList();
     }
 }
