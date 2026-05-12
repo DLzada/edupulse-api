@@ -5,6 +5,7 @@ import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface SchoolRepository extends JpaRepository<School, UUID> {
@@ -13,4 +14,6 @@ public interface SchoolRepository extends JpaRepository<School, UUID> {
     List<School> findByCityIgnoreCaseAndLevel(String city, SchoolLevel level);
 
     void deleteByInepCode(String inepCode);
+
+    Optional<School> findByInepCode(String inepCode);
 }

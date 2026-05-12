@@ -147,4 +147,26 @@ public class SchoolService {
                 .sorted(Comparator.comparing(SchoolDTO::infrastructureScore))
                 .toList();
     }
+
+    @Transactional
+    public SchoolDTO update(String inepCode, SchoolDTO dto){
+        School school = schoolRepository.findByInepCode(inepCode)
+                .orElseThrow(()-> new NoSuchElementException("Escola não encontrada!"));
+
+        school.setName(dto.name());
+        school.setStudentCount(dto.studentCount());
+        school.setLevel(dto.level());
+        school.setHasInternet(dto.hasInternet());
+        school.setHasLibrary(dto.hasLibrary());
+        school.setHasComputerLab(dto.hasComputerLab());
+        school.setHasSportsCourt(dto.hasSportsCourt());
+        school.setHasScienceLab(dto.hasScienceLab());
+        school.setHasAccessibility(dto.hasAccessibility());
+        school.setHasStudentWifi(dto.hasStudentWifi());
+        school.setTechnicalNotes(dto.technicalNotes());
+
+        School updateSchool = schoolRepository.save(school);
+
+        return mapToDTO(updateSchool);
+    }
 }
