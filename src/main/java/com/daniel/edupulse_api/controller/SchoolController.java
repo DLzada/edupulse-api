@@ -4,6 +4,7 @@ import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.dto.CityStatsDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import com.daniel.edupulse_api.service.SchoolService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,5 +52,11 @@ public class SchoolController {
     @ResponseStatus(HttpStatus.OK)
     public List<SchoolDTO> getCriticalSchools(@PathVariable String city){
         return service.getCriticalSchools(city);
+    }
+
+    @PutMapping("{inepCode}")
+    @ResponseStatus(HttpStatus.OK)
+    public SchoolDTO update(@PathVariable String inepCode, @Valid @RequestBody SchoolDTO dto){
+        return service.update(inepCode, dto);
     }
 }
