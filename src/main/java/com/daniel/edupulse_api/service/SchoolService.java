@@ -3,6 +3,7 @@ package com.daniel.edupulse_api.service;
 import com.daniel.edupulse_api.domain.model.School;
 import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.domain.repository.SchoolRepository;
+import com.daniel.edupulse_api.dto.CityStatsDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -104,5 +106,35 @@ public class SchoolService {
     @Transactional
     public void delete(String inepCode){
         schoolRepository.deleteByInepCode(inepCode);
+    }
+
+    public CityStatsDTO getCityStats(String city){
+        List<School> schools = schoolRepository.findByCityIgnoreCase(city);
+
+        if(schools.isEmpty()){
+            throw new NoSuchElementException("Cidade não encontrada ou sem escolas cadastradas.");
+        }
+
+        long totalSchools = schools.size();
+        long totalStudents = schools.stream().mapToLong(School::getStudentCount).sum();
+
+        double avgScore = schools.stream()
+                .mapToDouble(s -> mapToDTO(s).infrastructureScore())
+                .average()
+                .orElse(0.0);
+
+        long wifiSchools = schools.stream().filter(School::isHasInternet).count();
+        double wifiPercentage = (double) wifiSchools / totalSchools * 100;
+
+        return new CityStatsDTO(
+                city,
+                totalSchools,
+                totalStudents,
+                avgScore,
+                wifiSchools,
+                wifiPercentage
+        );
+
+
     }
 }
