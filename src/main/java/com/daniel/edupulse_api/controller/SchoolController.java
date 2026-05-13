@@ -6,6 +6,10 @@ import com.daniel.edupulse_api.dto.SchoolDTO;
 import com.daniel.edupulse_api.service.SchoolService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +24,9 @@ public class SchoolController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<SchoolDTO> getAll(){
-        return service.findAll();
+    public Page<SchoolDTO> getAll(
+            @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC)Pageable pageable){
+        return service.findAll(pageable);
     }
 
     @GetMapping("/ranking/{city}")
