@@ -16,4 +16,6 @@ public interface SchoolRepository extends JpaRepository<School, UUID> {
     void deleteByInepCode(String inepCode);
 
     Optional<School> findByInepCode(String inepCode);
+
+    List<School> findByNameContainingIgnoreCase(String name);
 }
