@@ -32,7 +32,7 @@ public class SchoolController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SchoolDTO create(@RequestBody @Valid SchoolDTO dto){
+    public SchoolDTO create(@Valid @RequestBody SchoolDTO dto){
         return service.save(dto);
     }
 
