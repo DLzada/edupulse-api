@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -47,6 +48,20 @@ public class ResourceExceptionHandler {
                 HttpStatus.BAD_REQUEST.value(),
                 "Erro de Validação",
                 errorMsg,
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<StandardError> handlerEnumError(HttpMessageNotReadableException e, HttpServletRequest request){
+        String msg = "Erro no formato dos dados: Verifique se os campos (como Nível ou Booleano) estão com valores válidos.";
+
+        StandardError err = new StandardError(
+                System.currentTimeMillis(),
+                HttpStatus.BAD_REQUEST.value(),
+                "JSON Malformado",
+                msg,
                 request.getRequestURI()
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
