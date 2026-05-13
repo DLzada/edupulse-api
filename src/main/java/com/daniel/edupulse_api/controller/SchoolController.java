@@ -59,4 +59,10 @@ public class SchoolController {
     public SchoolDTO update(@PathVariable String inepCode, @Valid @RequestBody SchoolDTO dto){
         return service.update(inepCode, dto);
     }
+
+    @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SchoolDTO> searchByName(@RequestParam String name){
+        return service.findByName(name);
+    }
 }
