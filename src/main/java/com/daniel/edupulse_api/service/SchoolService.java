@@ -172,4 +172,11 @@ public class SchoolService {
 
         return mapToDTO(updateSchool);
     }
+
+    public List<SchoolDTO> findByName(String name){
+        return schoolRepository.findByNameContainingIgnoreCase(name)
+                .stream()
+                .map(this::mapToDTO)
+                .toList();
+    }
 }
