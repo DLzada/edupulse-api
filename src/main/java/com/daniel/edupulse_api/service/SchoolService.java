@@ -64,7 +64,9 @@ public class SchoolService {
                 school.isHasStudentWifi(),
                 school.getTechnicalNotes(),
                 finalScore,
-                status
+                status,
+                school.getCreatedDate(),
+                school.getUpdatedAt()
         );
     }
 
