@@ -3,6 +3,8 @@ package com.daniel.edupulse_api.dto;
 import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import jakarta.validation.constraints.*;
 
+import java.time.LocalDateTime;
+
 public record SchoolDTO(
         @NotBlank(message = "O código do INEP é obrigatório!")
         String inepCode,
@@ -33,5 +35,8 @@ public record SchoolDTO(
         String technicalNotes,
 
         Double infrastructureScore,
-        String infrastructureStatus
+        String infrastructureStatus,
+
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {}
