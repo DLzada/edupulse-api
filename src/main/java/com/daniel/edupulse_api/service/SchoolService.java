@@ -7,6 +7,8 @@ import com.daniel.edupulse_api.dto.CityStatsDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -18,10 +20,9 @@ import java.util.NoSuchElementException;
 public class SchoolService {
     private final SchoolRepository schoolRepository;
 
-    public List<SchoolDTO> findAll(){
-        return schoolRepository.findAll().stream()
-                .map(this::mapToDTO)
-                .toList();
+    public Page<SchoolDTO> findAll(Pageable pageable){
+        return schoolRepository.findAll(pageable)
+                .map(this::mapToDTO);
     }
 
     private SchoolDTO mapToDTO(School school) {
