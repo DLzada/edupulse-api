@@ -5,6 +5,7 @@ import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.domain.repository.SchoolRepository;
 import com.daniel.edupulse_api.dto.CityStatsDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
+import com.daniel.edupulse_api.infra.exception.ResourceExceptionHandler;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,8 +22,7 @@ public class SchoolService {
     private final SchoolRepository schoolRepository;
 
     public Page<SchoolDTO> findAll(Pageable pageable){
-        return schoolRepository.findAll(pageable)
-                .map(this::mapToDTO);
+        return schoolRepository.findAllByActiveTrue(pageable).map(this::mapToDTO);
     }
 
     private SchoolDTO mapToDTO(School school) {
@@ -99,9 +99,9 @@ public class SchoolService {
         List<School> schools;
 
         if(level != null){
-            schools = schoolRepository.findByCityIgnoreCaseAndLevel(city, level);
+            schools = schoolRepository.findByCityIgnoreCaseAndLevelAndActiveTrue(city, level);
         } else {
-            schools = schoolRepository.findByCityIgnoreCase(city);
+            schools = schoolRepository.findByCityIgnoreCaseAndActiveTrueOrderByInfrastructureScoreDesc(city);
         }
         return schools.stream()
                 .map(this::mapToDTO)
@@ -111,11 +111,16 @@ public class SchoolService {
 
     @Transactional
     public void delete(String inepCode){
-        schoolRepository.deleteByInepCode(inepCode);
+        School school = schoolRepository.findByInepCodeAndActiveTrue(inepCode)
+                .orElseThrow(()-> new ResourceExceptionHandler("Escola nao encontrada"));
+
+        school.setActive(false);
+
+        schoolRepository.save(school);
     }
 
     public CityStatsDTO getCityStats(String city){
-        List<School> schools = schoolRepository.findByCityIgnoreCase(city);
+        List<School> schools = schoolRepository.findByCityIgnoreCaseAndActiveTrueOrderByInfrastructureScoreDesc(city);
 
         if(schools.isEmpty()){
             throw new NoSuchElementException("Cidade não encontrada ou sem escolas cadastradas.");
@@ -143,7 +148,7 @@ public class SchoolService {
     }
 
     public List<SchoolDTO> getCriticalSchools(String city){
-        List<School> schools = schoolRepository.findByCityIgnoreCase(city);
+        List<School> schools = schoolRepository.findByCityIgnoreCaseAndActiveTrueOrderByInfrastructureScoreDesc(city);
 
         return schools.stream()
                 .map(this::mapToDTO)
@@ -154,7 +159,7 @@ public class SchoolService {
 
     @Transactional
     public SchoolDTO update(String inepCode, SchoolDTO dto){
-        School school = schoolRepository.findByInepCode(inepCode)
+        School school = schoolRepository.findByInepCodeAndActiveTrue(inepCode)
                 .orElseThrow(()-> new NoSuchElementException("Escola não encontrada!"));
 
         school.setName(dto.name());
@@ -175,7 +180,7 @@ public class SchoolService {
     }
 
     public List<SchoolDTO> findByName(String name){
-        return schoolRepository.findByNameContainingIgnoreCase(name)
+        return schoolRepository.findByNameContainingIgnoreCaseAndActiveTrue(name)
                 .stream()
                 .map(this::mapToDTO)
                 .toList();
