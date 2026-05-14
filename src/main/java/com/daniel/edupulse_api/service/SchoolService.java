@@ -178,11 +178,9 @@ public class SchoolService {
         return mapToDTO(updateSchool);
     }
 
-    public List<SchoolDTO> findByName(String name){
-        return schoolRepository.findByNameContainingIgnoreCaseAndActiveTrue(name)
-                .stream()
-                .map(this::mapToDTO)
-                .toList();
+    public Page<SchoolDTO> findByName(String name, Pageable pageable){
+        return schoolRepository.findByNameContainingIgnoreCaseAndActiveTrue(name, pageable)
+                .map(this::mapToDTO);
     }
 
     public List<SchoolDTO> findByLevel(SchoolLevel level){

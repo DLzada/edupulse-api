@@ -13,6 +13,8 @@ import java.util.UUID;
 public interface SchoolRepository extends JpaRepository<School, UUID> {
     Page<School> findAllByActiveTrue(Pageable pageable);
 
+    Page<School> findByCityIgnoreCaseAndActiveTrue(String city, Pageable pageable);
+
     List<School> findByCityIgnoreCaseAndActiveTrue(String city);
 
     List<School> findByCityIgnoreCaseAndLevelAndActiveTrue(String city, SchoolLevel level);
@@ -21,7 +23,7 @@ public interface SchoolRepository extends JpaRepository<School, UUID> {
 
     Optional<School> findByInepCodeAndActiveTrue(String inepCode);
 
-    List<School> findByNameContainingIgnoreCaseAndActiveTrue(String name);
+    Page<School> findByNameContainingIgnoreCaseAndActiveTrue(String name, Pageable pageable);
 
     List<School> findByLevel(SchoolLevel level);
 }

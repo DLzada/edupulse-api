@@ -67,8 +67,8 @@ public class SchoolController {
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public List<SchoolDTO> searchByName(@RequestParam String name){
-        return service.findByName(name);
+    public Page<SchoolDTO> searchByName(@RequestParam String name, @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC)Pageable pageable){
+        return service.findByName(name, pageable);
     }
 
     @GetMapping("/level/{level}")
