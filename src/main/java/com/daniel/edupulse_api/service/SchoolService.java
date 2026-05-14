@@ -182,7 +182,7 @@ public class SchoolService {
     }
 
     public List<SchoolDTO> findByLevel(SchoolLevel level){
-        schoolRepository.findByLevel(level)
+        return schoolRepository.findByLevel(level)
                 .stream()
                 .map(this::mapToDTO)
                 .toList();

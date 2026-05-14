@@ -70,4 +70,10 @@ public class SchoolController {
     public List<SchoolDTO> searchByName(@RequestParam String name){
         return service.findByName(name);
     }
+
+    @GetMapping("/level/{level}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SchoolDTO> getByLevel(@PathVariable SchoolLevel level){
+        return service.findByLevel(level);
+    }
 }
