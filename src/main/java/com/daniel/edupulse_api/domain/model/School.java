@@ -56,4 +56,7 @@ public class School {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    @Column(nullable = false)
+    private boolean active = true;
 }
