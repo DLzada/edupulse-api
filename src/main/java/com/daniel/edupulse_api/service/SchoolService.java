@@ -183,10 +183,8 @@ public class SchoolService {
                 .map(this::mapToDTO);
     }
 
-    public List<SchoolDTO> findByLevel(SchoolLevel level){
-        return schoolRepository.findByLevel(level)
-                .stream()
-                .map(this::mapToDTO)
-                .toList();
+    public Page<SchoolDTO> findByLevel(SchoolLevel level, Pageable pageable){
+        return schoolRepository.findByLevel(level, pageable)
+                .map(this::mapToDTO);
     }
 }

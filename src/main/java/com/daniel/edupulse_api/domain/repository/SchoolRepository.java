@@ -25,5 +25,5 @@ public interface SchoolRepository extends JpaRepository<School, UUID> {
 
     Page<School> findByNameContainingIgnoreCaseAndActiveTrue(String name, Pageable pageable);
 
-    List<School> findByLevel(SchoolLevel level);
+    Page<School> findByLevel(SchoolLevel level, Pageable pageable);
 }

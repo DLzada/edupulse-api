@@ -73,7 +73,7 @@ public class SchoolController {
 
     @GetMapping("/level/{level}")
     @ResponseStatus(HttpStatus.OK)
-    public List<SchoolDTO> getByLevel(@PathVariable SchoolLevel level){
-        return service.findByLevel(level);
+    public Page<SchoolDTO> getByLevel(@PathVariable SchoolLevel level, @PageableDefault(page = 0, size = 5, sort = "name", direction = Sort.Direction.ASC)Pageable pageable){
+        return service.findByLevel(level, pageable);
     }
 }
