@@ -13,11 +13,11 @@ import java.util.UUID;
 public interface SchoolRepository extends JpaRepository<School, UUID> {
     Page<School> findAllByActiveTrue(Pageable pageable);
 
-    List<School> findByCityIgnoreCaseAndActiveTrueOrderByInfrastructureScoreDesc(String city);
+    List<School> findByCityIgnoreCaseAndActiveTrue(String city);
 
     List<School> findByCityIgnoreCaseAndLevelAndActiveTrue(String city, SchoolLevel level);
 
-    void deleteByInepCode(String inepCode);
+    //void deleteByInepCode(String inepCode);
 
     Optional<School> findByInepCodeAndActiveTrue(String inepCode);
 

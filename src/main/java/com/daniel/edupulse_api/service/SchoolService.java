@@ -5,7 +5,6 @@ import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.domain.repository.SchoolRepository;
 import com.daniel.edupulse_api.dto.CityStatsDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
-import com.daniel.edupulse_api.infra.exception.ResourceExceptionHandler;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -101,7 +100,7 @@ public class SchoolService {
         if(level != null){
             schools = schoolRepository.findByCityIgnoreCaseAndLevelAndActiveTrue(city, level);
         } else {
-            schools = schoolRepository.findByCityIgnoreCaseAndActiveTrueOrderByInfrastructureScoreDesc(city);
+            schools = schoolRepository.findByCityIgnoreCaseAndActiveTrue(city);
         }
         return schools.stream()
                 .map(this::mapToDTO)
@@ -112,7 +111,7 @@ public class SchoolService {
     @Transactional
     public void delete(String inepCode){
         School school = schoolRepository.findByInepCodeAndActiveTrue(inepCode)
-                .orElseThrow(()-> new ResourceExceptionHandler("Escola nao encontrada"));
+                .orElseThrow(()-> new NoSuchElementException("Escola nao encontrada"));
 
         school.setActive(false);
 
@@ -120,7 +119,7 @@ public class SchoolService {
     }
 
     public CityStatsDTO getCityStats(String city){
-        List<School> schools = schoolRepository.findByCityIgnoreCaseAndActiveTrueOrderByInfrastructureScoreDesc(city);
+        List<School> schools = schoolRepository.findByCityIgnoreCaseAndActiveTrue(city);
 
         if(schools.isEmpty()){
             throw new NoSuchElementException("Cidade não encontrada ou sem escolas cadastradas.");
@@ -148,7 +147,7 @@ public class SchoolService {
     }
 
     public List<SchoolDTO> getCriticalSchools(String city){
-        List<School> schools = schoolRepository.findByCityIgnoreCaseAndActiveTrueOrderByInfrastructureScoreDesc(city);
+        List<School> schools = schoolRepository.findByCityIgnoreCaseAndActiveTrue(city);
 
         return schools.stream()
                 .map(this::mapToDTO)
