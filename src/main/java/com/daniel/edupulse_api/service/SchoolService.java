@@ -180,4 +180,11 @@ public class SchoolService {
                 .map(this::mapToDTO)
                 .toList();
     }
+
+    public List<SchoolDTO> findByLevel(SchoolLevel level){
+        schoolRepository.findByLevel(level)
+                .stream()
+                .map(this::mapToDTO)
+                .toList();
+    }
 }
