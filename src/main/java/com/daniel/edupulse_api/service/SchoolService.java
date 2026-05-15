@@ -188,6 +188,15 @@ public class SchoolService {
                 .map(this::mapToDTO);
     }
 
+    public List<SchoolDTO> findSchoolWithDeficit(String city, String resource){
+        List<School> schools = schoolRepository.findByCityIgnoreCaseAndActiveTrue(city);
+        
+        return schools.stream()
+                .filter(school -> isResourceMissing(school, resource))
+                .map(this::mapToDTO)
+                .toList();
+    }
+
     private boolean isResourceMissing(School school, String resource){
         return switch (resource.toLowerCase()){
             case "internet" -> !school.isHasInternet();
