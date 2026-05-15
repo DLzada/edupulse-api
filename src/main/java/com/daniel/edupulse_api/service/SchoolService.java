@@ -8,10 +8,12 @@ import com.daniel.edupulse_api.dto.SchoolComparisonDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -215,6 +217,33 @@ public class SchoolService {
         return schoolRepository.findByInepCodeAndActiveTrue(inepCode)
                 .map(this::mapToDTO)
                 .orElseThrow(() -> new NoSuchElementException("Escola com INEP " + inepCode + " não encontrada ou inativa."));
+    }
+
+    public SchoolComparisonDTO compareSchools(String inep1, String inep2){
+        SchoolDTO s1 = findByInepCode(inep1);
+        SchoolDTO s2 = findByInepCode(inep2);
+
+        List<String> s1Advantages = new ArrayList<>();
+        List<String> s2Advantages = new ArrayList<>();
+
+        compareResource("Internet", s1.hasInternet(), s2.hasInternet(), s1Advantages, s2Advantages);
+        compareResource("Wi-fi alunos", s1.hasStudentWifi(), s2.hasStudentWifi(), s1Advantages, s2Advantages);
+        compareResource("Biblioteca", s1.hasLibrary(), s2.hasLibrary(), s1Advantages, s2Advantages);
+        compareResource("Laboratório de Informática", s1.hasComputerLab(), s2.hasComputerLab(), s1Advantages, s2Advantages);
+        compareResource("Laboratório de Ciências", s1.hasScienceLab(), s2.hasScienceLab(), s1Advantages, s2Advantages);
+        compareResource("Quadra de Esportes", s1.hasSportsCourt(), s2.hasSportsCourt(), s1Advantages, s2Advantages);
+        compareResource("Acessibilidade", s1.hasAccessibility(), s2.hasAccessibility(), s1Advantages, s2Advantages);
+
+        String winner;
+        if(s1.infrastructureScore()> s2.infrastructureScore()){
+            winner = s1.name();
+        } else if(s2.infrastructureScore() > s1.infrastructureScore()){
+            winner = s2.name();
+        } else{
+            winner = "Empate técnico";
+        }
+
+        return new SchoolComparisonDTO(s1, s2, winner ,s1Advantages, s2Advantages);
     }
 
     private void compareResource(String label, boolean r1, boolean r2, List<String> adv1, List<String> adv2){
