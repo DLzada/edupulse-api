@@ -76,4 +76,10 @@ public class SchoolController {
     public Page<SchoolDTO> getByLevel(@PathVariable SchoolLevel level, @PageableDefault(page = 0, size = 5, sort = "name", direction = Sort.Direction.ASC)Pageable pageable){
         return service.findByLevel(level, pageable);
     }
+
+    @GetMapping("/deficit")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SchoolDTO> findSchoolWithDeficit(@RequestParam String city, @RequestParam String resource){
+        return service.findSchoolWithDeficit(city, resource);
+    }
 }
