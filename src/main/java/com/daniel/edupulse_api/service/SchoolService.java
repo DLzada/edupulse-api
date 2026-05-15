@@ -4,6 +4,7 @@ import com.daniel.edupulse_api.domain.model.School;
 import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.domain.repository.SchoolRepository;
 import com.daniel.edupulse_api.dto.CityStatsDTO;
+import com.daniel.edupulse_api.dto.SchoolComparisonDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -208,6 +209,12 @@ public class SchoolService {
             case "studentwifi" -> !school.isHasStudentWifi();
             default -> throw new IllegalArgumentException("REcurso Inválido: " + resource);
         };
+    }
+
+    public SchoolDTO findByInepCode(String inepCode) {
+        return schoolRepository.findByInepCodeAndActiveTrue(inepCode)
+                .map(this::mapToDTO)
+                .orElseThrow(() -> new NoSuchElementException("Escola com INEP " + inepCode + " não encontrada ou inativa."));
     }
 
     private void compareResource(String label, boolean r1, boolean r2, List<String> adv1, List<String> adv2){

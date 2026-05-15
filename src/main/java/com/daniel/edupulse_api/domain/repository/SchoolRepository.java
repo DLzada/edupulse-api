@@ -27,3 +27,4 @@ public interface SchoolRepository extends JpaRepository<School, UUID> {
 
     Page<School> findByLevel(SchoolLevel level, Pageable pageable);
 }
+
