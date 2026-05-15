@@ -209,4 +209,9 @@ public class SchoolService {
             default -> throw new IllegalArgumentException("REcurso Inválido: " + resource);
         };
     }
+
+    private void compareResource(String label, boolean r1, boolean r2, List<String> adv1, List<String> adv2){
+        if(r1 && !r2) adv1.add(label);
+        else if(!r1 && r2) adv2.add(label);
+    }
 }
