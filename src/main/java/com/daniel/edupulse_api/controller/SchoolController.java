@@ -2,6 +2,7 @@ package com.daniel.edupulse_api.controller;
 
 import com.daniel.edupulse_api.domain.model.SchoolLevel;
 import com.daniel.edupulse_api.dto.CityStatsDTO;
+import com.daniel.edupulse_api.dto.SchoolComparisonDTO;
 import com.daniel.edupulse_api.dto.SchoolDTO;
 import com.daniel.edupulse_api.service.SchoolService;
 import jakarta.validation.Valid;
@@ -81,5 +82,11 @@ public class SchoolController {
     @ResponseStatus(HttpStatus.OK)
     public List<SchoolDTO> findSchoolWithDeficit(@RequestParam String city, @RequestParam String resource){
         return service.findSchoolWithDeficit(city, resource);
+    }
+
+    @GetMapping("/compare")
+    @ResponseStatus(HttpStatus.OK)
+    public SchoolComparisonDTO compare(@RequestParam String inep1, @RequestParam String inep2){
+        return service.compareSchools(inep1, inep2);
     }
 }
