@@ -187,4 +187,17 @@ public class SchoolService {
         return schoolRepository.findByLevel(level, pageable)
                 .map(this::mapToDTO);
     }
+
+    private boolean isResourceMissing(School school, String resource){
+        return switch (resource.toLowerCase()){
+            case "internet" -> !school.isHasInternet();
+            case "library" -> !school.isHasLibrary();
+            case "computerlab" -> !school.isHasComputerLab();
+            case "sportscourt" -> !school.isHasSportsCourt();
+            case "sciencelab" -> !school.isHasScienceLab();
+            case "acessibility" -> !school.isHasAccessibility();
+            case "studentwifi" -> !school.isHasStudentWifi();
+            default -> throw new IllegalArgumentException("REcurso Inválido: " + resource);
+        };
+    }
 }
