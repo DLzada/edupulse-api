@@ -57,3 +57,8 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
 * `POST /v1/schools` - Cadastra uma nova escola. Validações estritas barram códigos INEP duplicados ou dados corrompidos.
 * `PUT /v1/schools/{inepCode}` - Atualiza integralmente os dados operacionais de uma escola localizada pelo INEP.
 * `DELETE /v1/schools/{inepCode}` - Executa o Soft Delete, desativando a escola para consultas gerais sem apagar o registro físico.
+
+### Inteligência de Dados e Estatísticas
+* `GET /v1/schools/stats/{city}` - Gera um dashboard de dados consolidados da cidade informada (Média de Score, Total de Alunos, Percentual de Conectividade).
+* `GET /v1/schools/ranking/{city}` - Retorna a lista de escolas de um município ordenada de forma decrescente pelo Score de Infraestrutura. Permite filtro opcional por nível.
+* `GET /v1/schools/critical/{city}` - Lista todas as escolas de uma determinada cidade com Score inferior a 50 pontos, ordenadas da mais necessitada para a melhor estruturada.
