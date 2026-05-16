@@ -31,3 +31,14 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
 * **Documentação Interativa:** Springdoc OpenAPI / Swagger UI
 
 > A arquitetura segue o padrão de camadas (Controller -> Service -> Repository -> Entity), isolando completamente as regras de negócio das estruturas de transporte de dados por meio do uso de Java Records (DTOs).
+
+---
+
+## 3. Funcionalidades Principais
+
+* **Cálculo Automatizado de Score Escolar:** Cada escola cadastrada passa por uma matriz de pesagem baseada em seus recursos físicos. O score máximo é de 100 pontos, subdividido em:
+    * Conectividade (Até 30 pontos): Internet e Wi-Fi dedicado para alunos.
+    * Estrutura Pedagógica (Até 40 pontos): Biblioteca, laboratório de informática e laboratório de ciências.
+    * Bem-estar e Inclusão (Até 30 pontos): Acessibilidade arquitetônica e quadra de esportes.
+* **Classificação de Status Operacional:** Com base no Score Final, a API categoriza a escola automaticamente entre as faixas: "Crítica" (0 a 40), "Básica" (41 a 70) ou "Referência" (71 a 100).
+* **Análise Comparativa Avançada:** Endpoint dedicado para cruzar os dados de duas instituições distintas (via código INEP), gerando um relatório dinâmico que destaca as vantagens estruturais de uma unidade sobre a outra.
