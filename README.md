@@ -64,3 +64,9 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
 * `GET /v1/schools/critical/{city}` - Lista todas as escolas de uma determinada cidade com Score inferior a 50 pontos, ordenadas da mais necessitada para a melhor estruturada.
 * `GET /v1/schools/deficit` - Retorna as escolas de uma cidade que carecen de um recurso específico passados via query string (`city` e `resource`).
 * `GET /v1/schools/compare` - Recebe os parâmetros `inep1` e `inep2` e gera uma análise de vantagens competitivas e infraestrutura comparada.
+
+---
+
+## 5. Infraestrutura e Inicialização Local
+
+O projeto utiliza um fluxo de conteirização baseado em Docker Compose que isola a aplicação Java e o banco de dados PostgreSQL em uma rede privada interna, configurando automaticamente as dependências de inicialização.
