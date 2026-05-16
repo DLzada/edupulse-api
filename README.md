@@ -22,3 +22,10 @@ Embora sua criação tenha sido fundamentada para o município onde me resido, P
 ## 2. Tecnologias e Arquitetura
 
 O ecossistema técnico foi selecionado para garantir alta performance, tipagem estrita e portabilidade em qualquer ambiente de implantação:
+
+* **Ecossistema Principal:** Java 17 e Spring Boot 3
+* **Persistência de Dados:** Spring Data JPA e Hibernate
+* **Banco de Dados:** PostgreSQL (Implantado via contêineres Docker)
+* **Conteneirização e Infraestrutura:** Docker e Docker Compose
+* **Produtividade e Validação:** Project Lombok e Jakarta Validation
+* **Documentação Interativa:** Springdoc OpenAPI / Swagger UI
