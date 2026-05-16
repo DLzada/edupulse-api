@@ -42,3 +42,6 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
     * Bem-estar e Inclusão (Até 30 pontos): Acessibilidade arquitetônica e quadra de esportes.
 * **Classificação de Status Operacional:** Com base no Score Final, a API categoriza a escola automaticamente entre as faixas: "Crítica" (0 a 40), "Básica" (41 a 70) ou "Referência" (71 a 100).
 * **Análise Comparativa Avançada:** Endpoint dedicado para cruzar os dados de duas instituições distintas (via código INEP), gerando um relatório dinâmico que destaca as vantagens estruturais de uma unidade sobre a outra.
+* **Mapeamento de Déficits Setoriais:** Filtros avançados para isolar, dentro de uma determinada cidade, quais escolas não possuem um recurso específico (ex: exibir todas as escolas de Picuí que não possuem "computerlab").
+* **Agregação Estatística Municipal:** Consolidação em tempo real do total de colégios, soma da densidade de estudantes, média geral de score da cidade e métricas percentuais de inclusão digital.
+* **Exclusão Lógica (Soft Delete):** Preservação da integridade referencial histórica do banco de dados através do controle do estado lógico ativo/inativo das instituições, blindando as consultas contra deleções acidentais.
