@@ -45,3 +45,12 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
 * **Mapeamento de Déficits Setoriais:** Filtros avançados para isolar, dentro de uma determinada cidade, quais escolas não possuem um recurso específico (ex: exibir todas as escolas de Picuí que não possuem "computerlab").
 * **Agregação Estatística Municipal:** Consolidação em tempo real do total de colégios, soma da densidade de estudantes, média geral de score da cidade e métricas percentuais de inclusão digital.
 * **Exclusão Lógica (Soft Delete):** Preservação da integridade referencial histórica do banco de dados através do controle do estado lógico ativo/inativo das instituições, blindando as consultas contra deleções acidentais.
+
+---
+
+## 4. Estrutura de Endpoints (API Rest)
+
+### Escolas (CRUD e Paginação)
+* `GET /v1/schools` - Retorna todas as escolas ativas com paginação estruturada (`Pageable`).
+* `GET /v1/schools/search` - Busca escolas por nome via correspondência parcial e insensível a maiúsculas/minúsculas (`ContainingIgnoreCase`). Mapeado com paginação.
+* `GET /v1/schools/level/{level}` - Filtra colégios por nível de ensino (ex: `ENSINO_MEDIO`, `TECNICO`, `SUPERIOR`).
