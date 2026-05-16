@@ -78,3 +78,16 @@ O projeto utiliza um fluxo de conteirização baseado em Docker Compose que isol
 ### Arquivos de Configuração
 * [Docker File](Dockerfile)
 * [Docker compose](docker-compose.yml)
+
+### Instruções para Execução:
+1. Certifique-se de que não há nenhuma instância local do PostgreSQL rodando nativamente na porta `5432`.
+
+2. Navegue até a pasta raiz do projeto onde os arquivos `Dockerfile` e `docker-compose.yml` estão localizados.
+
+3. Execute o comando para compilar o código fonte e inicializar os contêineres em segundo plano:
+    ```bash
+   docker compose up --build -d
+   
+4. Verifique o status da inicialização do Spring Boot inspecionando os logs do contêiner:
+    ```bash
+   docker logs edupulse-app -f
