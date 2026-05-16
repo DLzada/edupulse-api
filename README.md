@@ -54,3 +54,6 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
 * `GET /v1/schools` - Retorna todas as escolas ativas com paginação estruturada (`Pageable`).
 * `GET /v1/schools/search` - Busca escolas por nome via correspondência parcial e insensível a maiúsculas/minúsculas (`ContainingIgnoreCase`). Mapeado com paginação.
 * `GET /v1/schools/level/{level}` - Filtra colégios por nível de ensino (ex: `ENSINO_MEDIO`, `TECNICO`, `SUPERIOR`).
+* `POST /v1/schools` - Cadastra uma nova escola. Validações estritas barram códigos INEP duplicados ou dados corrompidos.
+* `PUT /v1/schools/{inepCode}` - Atualiza integralmente os dados operacionais de uma escola localizada pelo INEP.
+* `DELETE /v1/schools/{inepCode}` - Executa o Soft Delete, desativando a escola para consultas gerais sem apagar o registro físico.
