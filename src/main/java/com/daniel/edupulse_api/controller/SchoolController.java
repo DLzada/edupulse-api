@@ -7,6 +7,7 @@ import com.daniel.edupulse_api.dto.SchoolDTO;
 import com.daniel.edupulse_api.service.SchoolService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -26,7 +27,7 @@ public class SchoolController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<SchoolDTO> getAll(
-            @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC)Pageable pageable){
+            @ParameterObject Pageable pageable){
         return service.findAll(pageable);
     }
 
@@ -68,13 +69,13 @@ public class SchoolController {
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public Page<SchoolDTO> searchByName(@RequestParam String name, @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC)Pageable pageable){
+    public Page<SchoolDTO> searchByName(@RequestParam String name, @ParameterObject Pageable pageable){
         return service.findByName(name, pageable);
     }
 
     @GetMapping("/level/{level}")
     @ResponseStatus(HttpStatus.OK)
-    public Page<SchoolDTO> getByLevel(@PathVariable SchoolLevel level, @PageableDefault(page = 0, size = 5, sort = "name", direction = Sort.Direction.ASC)Pageable pageable){
+    public Page<SchoolDTO> getByLevel(@PathVariable SchoolLevel level, @ParameterObject Pageable pageable){
         return service.findByLevel(level, pageable);
     }
 
