@@ -24,7 +24,7 @@ public class SchoolService {
     private final SchoolRepository schoolRepository;
 
     public Page<SchoolDTO> findAll(Pageable pageable){
-        return schoolRepository.findAllByActiveTrue(pageable).map(this::mapToDTO);
+        return schoolRepository.findByActiveTrue(pageable).map(this::mapToDTO);
     }
 
     private SchoolDTO mapToDTO(School school) {
@@ -90,6 +90,7 @@ public class SchoolService {
                 .hasAccessibility(dto.hasAccessibility())
                 .hasStudentWifi(dto.hasStudentWifi())
                 .technicalNotes(dto.technicalNotes())
+                .active(true)
                 .build();
 
         School savedSchool = schoolRepository.save(school);

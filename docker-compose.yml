@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: edupulse-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=edupulse_db
+      - POSTGRES_USER=app_admin
+      - POSTGRES_PASSWORD=123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: edupulse-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/edupulse_db
+      - DB_USER=app_admin
+      - DB_PASSWORD=123
+      - spring.jpa.hibernate.ddl-auto=update
+
+volumes:
+  postgres_data:

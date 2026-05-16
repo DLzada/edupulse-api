@@ -58,5 +58,6 @@ public class School {
     private LocalDateTime updatedAt;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean active = true;
 }

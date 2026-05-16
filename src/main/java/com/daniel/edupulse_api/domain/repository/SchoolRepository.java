@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SchoolRepository extends JpaRepository<School, UUID> {
-    Page<School> findAllByActiveTrue(Pageable pageable);
+    Page<School> findByActiveTrue(Pageable pageable);
 
     Page<School> findByCityIgnoreCaseAndActiveTrue(String city, Pageable pageable);
 
