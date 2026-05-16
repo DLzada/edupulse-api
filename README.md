@@ -1,0 +1,3 @@
+# EduPulse API
+
+EduPulse API é uma plataforma robusta de inteligência de dados voltada à análise, monitoramento e otimização da infraestrutura tecnológica e pedagógica de instituições de ensino. Desenvolvida inicialmente para suprir as demandas de mapeamento situacional e alocação de recursos em Picuí e regiões circunvizinhas, a arquitetura foi projetada de forma modular e escalável, permitindo sua aplicação e expansão imediata para qualquer município ou cenário regional do país.
