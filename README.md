@@ -29,3 +29,5 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
 * **Conteneirização e Infraestrutura:** Docker e Docker Compose
 * **Produtividade e Validação:** Project Lombok e Jakarta Validation
 * **Documentação Interativa:** Springdoc OpenAPI / Swagger UI
+
+> A arquitetura segue o padrão de camadas (Controller -> Service -> Repository -> Entity), isolando completamente as regras de negócio das estruturas de transporte de dados por meio do uso de Java Records (DTOs).
