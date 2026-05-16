@@ -16,3 +16,9 @@ O EduPulse foi concebido para mitigar essas dores através de três pilares:
 * **Inteligência Geográfica e Estatística:** Consolidação automatizada de métricas por município, permitindo comparar colégios de forma cruzada e identificar quais unidades sofrem com déficits específicos de infraestrutura.
 
 Embora sua criação tenha sido fundamentada para o município onde me resido, Picuí, também pode ser utilizado por municípios vizinhos com os próprios dados locais de minha cidade. O Edupulse Api tem independência de escopo podendo permitir o cadastro e o monitoramento geopolítico de qualquer malha escolar e qualquer região.
+
+---
+
+## 2. Tecnologias e Arquitetura
+
+O ecossistema técnico foi selecionado para garantir alta performance, tipagem estrita e portabilidade em qualquer ambiente de implantação:
