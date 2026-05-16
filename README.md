@@ -70,3 +70,11 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
 ## 5. Infraestrutura e Inicialização Local
 
 O projeto utiliza um fluxo de conteirização baseado em Docker Compose que isola a aplicação Java e o banco de dados PostgreSQL em uma rede privada interna, configurando automaticamente as dependências de inicialização.
+
+### Pré-requisitos
+* Docker instalado na máquina operacional.
+* Docker Compose ativo.
+
+### Arquivos de Configuração
+* [Docker File](Dockerfile)
+* [Docker compose](docker-compose.yml)
