@@ -9,3 +9,10 @@ A aplicação consolida indicadores complexos a partir de dados estruturados das
 ## 1. O Problema Real
 
 A gestões públicas de educação frequentemente enfrentam desafios da assimetria de informações. Dados operacionais e estruturais — como conectividade em sala de aula, laboratórios disponíveis, recursos de acessibilidade e bibliotecas — costumam residir em relatórios descentralizados ou planilhas estáticas. Isso dificulta uma resposta rápida a problemas críticos.
+
+O EduPulse foi concebido para mitigar essas dores através de três pilares:
+* **Centralização e Consistência:** Substituição do controle manual por uma API REST estruturada sob regras estritas de integridade de dados (validações via Jakarta Validation e restrições de unicidade como o código INEP).
+* **Auditoria de Infraestrutura Dinâmica:** Um algoritmo central traduz a presença ou ausência de recursos físicos em pontuações numéricas ponderadas (Infrastructure Score), categorizando o nível operacional de cada instituição.
+* **Inteligência Geográfica e Estatística:** Consolidação automatizada de métricas por município, permitindo comparar colégios de forma cruzada e identificar quais unidades sofrem com déficits específicos de infraestrutura.
+
+Embora sua criação tenha sido fundamentada em uma realidade fictícia do município onde me resido, Picuí, também pode ser utilizado por municípios vizinhos com os dados locais de minha cidade. O Edupulse Api tem independência de escopo podendo permitir o cadastro e o monitoramento geopolítico de qualquer malha escolar, de qualquer região.
