@@ -62,3 +62,5 @@ O ecossistema técnico foi selecionado para garantir alta performance, tipagem e
 * `GET /v1/schools/stats/{city}` - Gera um dashboard de dados consolidados da cidade informada (Média de Score, Total de Alunos, Percentual de Conectividade).
 * `GET /v1/schools/ranking/{city}` - Retorna a lista de escolas de um município ordenada de forma decrescente pelo Score de Infraestrutura. Permite filtro opcional por nível.
 * `GET /v1/schools/critical/{city}` - Lista todas as escolas de uma determinada cidade com Score inferior a 50 pontos, ordenadas da mais necessitada para a melhor estruturada.
+* `GET /v1/schools/deficit` - Retorna as escolas de uma cidade que carecen de um recurso específico passados via query string (`city` e `resource`).
+* `GET /v1/schools/compare` - Recebe os parâmetros `inep1` e `inep2` e gera uma análise de vantagens competitivas e infraestrutura comparada.
